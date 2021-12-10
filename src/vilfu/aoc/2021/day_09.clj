@@ -103,7 +103,24 @@
   (sum-risk-levels input-1)
   ;; => 580
 
-  (defn find-neighbours-coords [data {:keys [row col]}]
+  
+
+  (def example-rows (->> example-data
+                         ->rows))
+
+  (->>  example-rows
+        find-low-points
+        (map #(find-neighbour-coords example-rows %)))  
+    
+  (let [data (->> example-data
+                  ->rows)
+        low-points (find-low-points data)]
+    (for [point low-points]
+      (expand-basin-around data point)))
+
+  )
+
+(defn find-neighbours-coords [data {:keys [row col]}]
     (cond-> []
       (< 0 row)
       (conj [(dec row) col])
@@ -116,23 +133,6 @@
 
       (< (inc col) (count (get data row)))
       (conj [row (inc col)])))
-
-  (def example-rows (->> example-data
-                         ->rows))
-
-  (->>  example-rows
-        find-low-points
-        (map #(find-neighbour-coords example-rows %)))
-
-  
-    
-  (let [data (->> example-data
-                  ->rows)
-        low-points (find-low-points data)]
-    (for [point low-points]
-      (expand-basin-around data point)))
-
-  )
 
 (defn expand-basin-around [data point]
   (loop [basin #{point}]
@@ -169,4 +169,6 @@
   ;; => 1134
 
   (basin-sizes-multiplied (slurp "resources/inputs/input_day_09.txt"))
-;; => 856716  )
+  ;; => 856716
+
+  )

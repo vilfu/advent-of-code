@@ -1,5 +1,5 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.3"}}
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}}
  :aliases
  {
   :test {:extra-paths ["test"]
@@ -7,6 +7,6 @@
                       {:git/tag "v0.5.0" :git/sha "b3fd0d2"}}
          :main-opts ["-m" "cognitect.test-runner"]
          :exec-fn cognitect.test-runner.api/test}
-  :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "1.1.128"}}
+  :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "2.1.303"}}
             :main-opts ["-m" "hf.depstar.uberjar" "advent-of-code-2021.jar"
                         "-C" "-m" "vilfu.advent-of-code-2021"]}}}

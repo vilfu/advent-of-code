@@ -22,11 +22,7 @@ hmdt: 32")
 
 (defn parse-monkey
   ([label number] [:label label :number (parse-long number)])
-  ([label _ arg1 op arg2] (let [operator (case op
-                                           "+" +
-                                           "-" -
-                                           "/" /
-                                           "*" *)]
+  ([label _ arg1 op arg2] (let [operator (symbol op)]
                             [:label label :op operator [arg1 arg2]])))
 
 (defn ->data [lines]
